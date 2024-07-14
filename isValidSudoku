@@ -45,3 +45,28 @@ public boolean isValidSudoku1(char board[][]) {
         }
         return true;
     }
+//位运算，存储位数为纵坐标
+  public boolean isValidSudoku(char board[][]){
+        int[] row1 =new int[9];
+        int[] row2 =new int[9];
+        int[] row3 =new int[9];
+        for (int i = 0; i < 9; i++) {
+
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] == '.')
+                    continue;
+                int k=1<< (board[i][j]-'0'-1);
+                int number =i/3*3+j/3;
+                if ((row1[i]&k)>0||(row2[j]&k)>0||(row3[number]&k)>0){
+                    return false;
+                }
+                row1[i]|=k;
+                row2[j]|=k; row3[number]|=k;
+
+            }
+
+        }
+        return true;
+
+
+    }
