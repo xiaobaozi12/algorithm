@@ -1,0 +1,43 @@
+        public static int reverse(int x) {
+            int res =0;
+            while (x!=0){
+                res=x%10+res*10;
+                if (res%10!=x%10){
+                    return 0;
+                }
+                x/=10;
+            }
+            return (int) res;
+
+        
+    }
+
+//        String s = String.valueOf(x);
+//        String[] split = s.split("");
+//        int a=0;
+//        if (split[0].equals("-")){
+//            a++;
+//        }
+//        for (int i = 0; i < split.length/2; i++) {
+//
+//            String row =split[a];
+//            split[a]=split[split.length-1-i];
+//            split[split.length-1-i]=row;
+//            a++;
+//        }
+//        StringBuilder s2=new StringBuilder();
+//        for (String s1:
+//             split) {
+//            s2.append(s1);
+//
+//        }
+//        System.out.println(s2);
+//        int b;
+//      try {
+//         b= Integer.parseInt(s2.toString());
+//      }catch (Exception e){
+//          return 0;
+//      }
+//             return b;
+//    }
+
