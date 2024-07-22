@@ -1,0 +1,76 @@
+    public static int strStr(String haystack, String needle) {
+  if (needle.length()==0){
+      return 0;
+  }
+  int i =0;
+  int j=0;
+  int[] ints =new  int[needle.length()];
+  getNext(needle,ints);
+  while (i<haystack.length()&& j<needle.length()){
+      if (j==-1||haystack.charAt(i)==needle.charAt(j)){
+          i++;
+          j++;
+
+      }
+      else {
+//          i=i-j+1;
+//          j=0;
+          j = ints[j];
+      }
+      if (j==needle.length()){
+          return i-j;
+      }
+  }
+  return -1;
+     }
+
+    private static void getNext(String p, int next[]) {
+        int len = p.length();
+        int i = 0;
+        int j = -1;
+        next[0] = -1;//这个默认的，
+        /**
+         * 匹配的时候是当前字符的前一个和前面的匹配，所以最后一个是不参与匹配的，可以看strStr方法的注释，
+         */
+        while (i < len - 1) {
+            if (j == -1 || p.charAt(i) == p.charAt(j)) {
+                /**
+                 * 如果j不等于-1，指定的字符相等，那么i和j要往后移一位，这点很好理解，如果j为-1的时候，i往后移移位，j置为0
+                 * 重新开始匹配。next[i]是匹配成功的数量
+                 */
+                i++;
+                j++;
+                next[i] = j;
+            } else
+            /**
+             * 关键是这里不好理解，为什么匹配失败要让next[j]等于j，要记住这里的next[j]是指匹配成功的数量，有可能为0，也有可能是其他数.比如
+             * 字符串ABCABXYABCABATDM,对应的next数组为{-1	0	0	0	1	2	0	0	1	2	3	4	5	1	0	0	}
+             */
+                j = next[j];
+        }
+    }给你两个字符串 haystack 和 needle ，请你在 haystack 字符串中找出 needle 字符串的第一个匹配项的下标（下标从 0 开始）。如果 needle 不是 haystack 的一部分，则返回  -1 。
+
+ 
+
+示例 1：
+
+输入：haystack = "sadbutsad", needle = "sad"
+输出：0
+解释："sad" 在下标 0 和 6 处匹配。
+第一个匹配项的下标是 0 ，所以返回 0 。
+示例 2：
+
+输入：haystack = "leetcode", needle = "leeto"
+输出：-1
+解释："leeto" 没有在 "leetcode" 中出现，所以返回 -1 。
+ 
+
+提示：
+
+1 <= haystack.length, needle.length <= 104
+haystack 和 needle 仅由小写英文字符组成
+
+作者：LeetCode
+链接：https://leetcode.cn/leetbook/read/top-interview-questions-easy/xnr003/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
