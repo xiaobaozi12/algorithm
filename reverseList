@@ -1,0 +1,29 @@
+   public ListNode reverseList(ListNode head) {
+       Stack<ListNode> stack = new Stack<>();
+//        ListNode listNode =null;
+//
+//        while (head!=null){
+//            ListNode next = head.next;//保存next节点
+//            head.next =listNode;//该节点的下一位应该指到listNode，这样后面连着的就是新的链表
+//            listNode=head;//把这个head获取到
+//            head=next;//向后移一位
+        //此操作先取下第一个
+//        }
+//        return listNode;
+        while (head!=null){
+          stack.push(head);
+          head=head.next;
+        }
+        if (stack.isEmpty())
+            return null;
+        ListNode pop = stack.pop();
+        ListNode re =pop;
+        while (!stack.isEmpty()){
+            pop.next=stack.pop();
+            pop=pop.next;
+        }
+        pop.next=null;
+            return re;
+    }
+//两种方法：1.使用栈来进行操作，将链表一个一个拆开放入栈中，在栈中进行取出时，先取到最后一位，这就是新的链表，将该链表记录下来，之后返回。因为拿了的链表要进行next，不会到头节点。
+//给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
