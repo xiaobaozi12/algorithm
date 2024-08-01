@@ -1,0 +1,76 @@
+
+//给你一个单链表的头节点 head ，请你判断该链表是否为回文链表。如果是，返回 true ；否则，返回 false 。
+      public class ListNode {
+          int val;
+          ListNode next;
+          ListNode() {}
+          ListNode(int val) { this.val = val; }
+          ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+      }
+
+//两种方法：1.使用栈来进行操作，将链表一个一个拆开放入栈中，在栈中进行取出时，先取到最后一位，这就是新的链表，将该链表记录下来，之后返回。因为拿了的链表要进行next，不会到头节点。
+public boolean isPalindrome(ListNode head) {
+        ListNode slow =head;
+        ListNode fast =head;
+        while (fast!=null&&fast.next!=null){
+            slow=slow.next;
+            fast =fast.next.next;
+        }
+        if (fast!=null){
+            slow=slow.next;
+        }
+    ListNode count = count(slow);
+        fast=head;
+        while (count!=null){
+            if (fast.val!=count.val){
+                return false;
+            }
+            fast=fast.next;
+            count=count.next;
+        }
+        return true;
+
+
+}
+//反转链表
+    public ListNode count(ListNode listNode){
+        ListNode newnode=null;
+        while (listNode!=null){
+            //节点保存
+            ListNode next = listNode.next;
+            //节点赋值
+            listNode.next=newnode;
+            newnode=listNode;
+
+            listNode=next;
+            System.out.println(1);
+        }
+        return newnode;
+    }
+    //用栈存入在比较，就是栈一个一个取，和head比较即可。也可以使用递归从后向前遍历比较
+//    我们知道，如果对链表逆序打印可以这样写
+//
+//
+//    private void printListNode(ListNode head) {
+//        if (head == null)
+//            return;
+//        printListNode(head.next);
+//        System.out.println(head.val);
+//    }
+//    也就是说最先打印的是链表的尾结点，他是从后往前打印的，如果以后谁再给你说单向链表不能从后往前遍历，你就拿这段代码怼他，哈哈。看到这里是不是有灵感了，我们来对上面的对面进行改造一下
+//
+//
+//    ListNode temp;
+//
+//    public boolean isPalindrome(ListNode head) {
+//        temp = head;
+//        return check(head);
+//    }
+//
+//    private boolean check(ListNode head) {
+//        if (head == null)
+//            return true;
+//        boolean res = check(head.next) && (temp.val == head.val);
+//        temp = temp.next;
+//        return res;
+//    }
