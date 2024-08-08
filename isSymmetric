@@ -1,0 +1,14 @@
+  //同样递归使用，每个进行左右判断，在进行下面的左右判断
+    //给你一个二叉树的根节点 root ， 检查它是否轴对称。
+    public boolean isSymmetric(TreeNode root) {
+        if (root==null)
+            return true;
+   return      istrue(root.left,root.right);
+    }
+    public boolean istrue (TreeNode left ,TreeNode right){
+        if (left==null&&right==null)
+            return true;
+        if (left==null||right==null||left.val!=right.val)
+            return false;
+       return istrue(left.left,right.right)&&istrue(left.right,right.left);
+    }
