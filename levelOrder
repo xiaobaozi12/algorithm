@@ -1,0 +1,26 @@
+  public List<List<Integer>> levelOrder(TreeNode root) {
+
+        if (root==null)
+            return new ArrayList<>();
+       List<List<Integer>> list1 = new ArrayList<>();
+        Deque<TreeNode> list = new LinkedList<>();
+        list.push(root);
+
+
+        while (!list.isEmpty()){
+            int size = list.size();
+            List<Integer> subList = new ArrayList<>();
+            while (size-- >0){
+
+                TreeNode pop = list.pop();
+                subList.add(pop.val);
+                if(pop.left!=null)
+                    list.addLast(pop.left);
+                if(pop.right!=null)
+                    list.addLast(pop.right);
+
+            }
+            list1.add(subList);
+        }
+        return list1;
+    }
