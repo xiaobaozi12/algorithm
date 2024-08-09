@@ -1,0 +1,35 @@
+给你一个整数数组 nums ，其中元素已经按 升序 排列，请你将其转换为一棵 平衡 二叉搜索树。
+//相当于数组转为二叉树，如果数组没有排好序进行排序，之后转二叉树的情况是从中间开始遍历，因此每次递归找中间值放入新建的树种，再把树挂载到原本的树上即可，FBS也可（没有进行代码编写）
+    public TreeNode sortedArrayToBST(int[] nums) {
+        if (nums.length==0)
+            return new TreeNode();
+     return    ArrayToTree(0,nums.length-1,nums);
+
+    }
+    public TreeNode ArrayToTree(int begin,int end,int[] nums){
+        if (begin>end)
+            return null;
+        int mind =(begin+end)>>1;
+        TreeNode treeNode = new TreeNode(nums[mind]);
+        treeNode.left=ArrayToTree(begin,mind-1,nums);
+        treeNode.right=ArrayToTree(mind+1,end,nums);
+        return treeNode;
+
+    }    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
