@@ -1,0 +1,19 @@
+/* The isBadVersion API is defined in the parent class VersionControl.
+      boolean isBadVersion(int version); */
+//通过二分查找获取到错误的版本，因此每次取mid为中间值进行判断。
+public class Solution extends VersionControl {
+ public int firstBadVersion(int n) {
+
+    int start=1;
+    int end =n;
+    while (start<end){
+        int mid =start+(end-start)/2;
+        if (false==isBadVersion(mid)){
+            start=mid+1;
+        }else {
+            end=mid;
+        }
+    }
+    return start;
+    }
+}
