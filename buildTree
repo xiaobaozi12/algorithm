@@ -1,0 +1,45 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+public TreeNode buildTree(int[] preorder, int[] inorder) {
+            List<Integer> preorderList =new ArrayList<>();
+            List<Integer> inorderList =new ArrayList<>();
+        for (int i = 0; i < preorder.length; i++) {
+            preorderList.add(preorder[i]);
+            inorderList.add(inorder[i]);
+        }
+        return helper(preorderList,inorderList);
+}
+public    TreeNode helper (List<Integer> preorder, List<Integer> inorder){
+    if (inorder.size()==0)
+        return null;
+    Integer remove = preorder.remove(0);
+    TreeNode treeNode = new TreeNode(remove);
+    int mid = inorder.indexOf(remove);
+
+    treeNode.left=helper(preorder,inorder.subList(0,mid));
+    treeNode.right=helper(preorder,inorder.subList(mid+1,inorder.size()));
+    return treeNode;
+}
+}
+//首先将数组复制到集合中，进行递归遍历，从左边遍历之后遍历右边。
+
+输入: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
+输出: [3,9,20,null,null,15,7]
+示例 2:
+
+输入: preorder = [-1], inorder = [-1]
+输出: [-1]
