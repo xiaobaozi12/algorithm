@@ -1,0 +1,31 @@
+对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和。
+然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。
+如果这个过程 结果为 1，那么这个数就是快乐数。
+输入：n = 19
+输出：true
+解释：
+12 + 92 = 82
+82 + 22 = 68
+62 + 82 = 100
+12 + 02 + 02 = 1
+//进行快乐数判断（）用set记录下一次需要计算的n即各个数的平方和,利用set去重,如果出现重复的则会进入死循环,需要做处理
+public boolean isHappy(int n) {
+HashSet<Integer> set = new HashSet<>();
+
+while (n!=1){
+    int n1=n;
+    int sum=0;
+    while (n1>=10){
+        int mod =n1%10;
+        n1/=10;
+        sum +=mod*mod;
+    }
+    sum += n1*n1;
+    if (!set.add(sum)){
+        return false;
+    }
+    n=sum;
+}
+return true;
+
+}
