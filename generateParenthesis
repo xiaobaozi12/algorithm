@@ -1,0 +1,22 @@
+public List<String> generateParenthesis(int n) {
+ArrayList<String> list = new ArrayList<>();
+re1(list,n,n,"");
+return list;
+}
+public void re1(ArrayList<String> list,int left,int right,String s1){
+    if (left==0&&right==0){
+        list.add(s1);
+    }
+    if (left<0)
+        return;
+    if (right<left)
+        return;
+    re1(list,left-1,right,s1+"(");
+    re1(list,left,right-1,s1+")");
+}
+输入：n = 3
+输出：["((()))","(()())","(())()","()(())","()()()"]
+输入：n = 1
+输出：["()"]
+
+//进行括号生成，使用递归方法进行生成，最后进行条件筛选，递归使用左右加入括号，最后进行限定条件。
