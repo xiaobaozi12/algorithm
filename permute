@@ -1,0 +1,28 @@
+class Solution {
+public List<List<Integer>> permute(int[] nums) {
+    ArrayList<List<Integer>> list = new ArrayList<>();
+    add1(list,new ArrayList(),nums);
+    return list;
+}
+public  void add1 (ArrayList<List<Integer>> list,ArrayList list1,int[] nums){
+    if (list1.size()==nums.length){
+        list.add(new ArrayList<>(list1));
+        return;
+    }
+    for (int i = 0; i < nums.length; i++) {
+        if (list1.contains(nums[i]))
+            continue;
+
+        list1.add(nums[i]);
+        add1(list,list1,nums);
+        list1.remove(list1.size()-1);
+    }
+}
+}
+//递归算法计算，循环列举，找到限定条件即可
+
+给定一个不含重复数字的数组  ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。
+输入：nums = [1,2,3]
+输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+输入：nums = [0,1]
+输出：[[0,1],[1,0]]
