@@ -1,0 +1,20 @@
+class Solution {
+ public static int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums)
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        //最大堆
+        PriorityQueue<int[]> priorityQueue = new PriorityQueue<>((a, b) -> b[1] - a[1]);
+        for (int key : map.keySet())
+            priorityQueue.add(new int[]{key, map.get(key)});
+        int[] res = new int[k];
+        for (int i = 0; i < k; i++)
+            res[i] = priorityQueue.poll()[0];
+        return res;
+        
+    }
+}
+给你一个整数数组和一个整数 ，请你返回其中出现频率前 k高的元素。你可以按 任意顺序 返回答案
+输入: nums = [1,1,1,2,2,3], k = 2
+输出: [1,2]
+//开始使用前后进行判断，考虑问题太多放弃。之后计数然后放入堆中获取
